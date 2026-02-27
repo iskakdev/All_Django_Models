@@ -14,11 +14,13 @@ from all_projects.frontend.diabetes_front import check_diabetes
 from all_projects.frontend.avocado_front import check_avocado
 from all_projects.frontend.mushroom_front import check_mushroom
 from all_projects.frontend.telecom_front import check_telecom
+from all_projects.frontend.hre_front import check_hre
 
 
 with st.sidebar:
-    name = st.radio(label='Models: ', options=['Info', 'Student', 'Titanic', 'House', 'Bank',
-                                                'Diabetes', 'Avocado', 'Mushroom', 'Telecom'])
+    name = st.radio(label='Models: ', options=['Info', 'Student Django', 'Titanic Django', 'House Django', 'Bank Django',
+                                               'Diabetes Django', 'Avocado Django', 'Mushroom, Django', 'Telecom Django',
+                                               'HR Django'])
 
 if name == 'Info':
     st.title('Welcome')
@@ -30,19 +32,21 @@ if name == 'Info':
     st.write('- **Avocado** — предсказание цен на авокадо')
     st.write('- **Mushroom** — классификация грибов')
     st.write('- **Telecom** — отток клиентов телекома')
-elif name == 'Student':
+elif name == 'Student Django':
     check_student()
-elif name == 'Titanic':
+elif name == 'Titanic Django':
     check_titanic()
-elif name == 'House':
+elif name == 'House Django':
     check_house()
-elif name == 'Bank':
+elif name == 'Bank Django':
     check_bank()
-elif name == 'Diabetes':
+elif name == 'Diabetes Django':
     check_diabetes()
-elif name == 'Avocado':
+elif name == 'Avocado Django':
     check_avocado()
-elif name == 'Mushroom':
+elif name == 'Mushroom Django':
     check_mushroom()
-elif name == 'Telecom':
+elif name == 'Telecom Django':
     check_telecom()
+elif name == 'HR Django':
+    check_hre()
