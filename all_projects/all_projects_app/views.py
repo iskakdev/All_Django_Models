@@ -3,59 +3,65 @@ from rest_framework import views, status
 from rest_framework.response import Response
 from .serializers import (StudentPerformanceSerializers, TitanicSerializers, HouseSerializers,
                           BankSerializers, DiabetesSerializers, AvocadoSerializers,
-                          MushroomSerializers, TelecomSerializers)
+                          MushroomSerializers, TelecomSerializers, HREmployeeSerializers)
 import joblib
 import os
 from django.conf import settings
 import numpy as np
 
-scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'student_scaler.pkl')
-student_scaler = joblib.load(scaler_path)
+student_scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'student_scaler.pkl')
+student_scaler = joblib.load(student_scaler_path)
 
-model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'student_model.pkl')
-student_model = joblib.load(model_path)
+student_model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'student_model.pkl')
+student_model = joblib.load(student_model_path)
 
-scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'scaler_titanic (1).pkl')
-model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'log_model_titanic (1).pkl')
+titanic_scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'scaler_titanic (1).pkl')
+titanic_model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'log_model_titanic (1).pkl')
 
-titanic_scaler = joblib.load(scaler_path)
-titanic_model = joblib.load(model_path)
+titanic_scaler = joblib.load(titanic_scaler_path)
+titanic_model = joblib.load(titanic_model_path)
 
-scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'house_scaler.pkl')
-model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'house_model.pkl')
+house_scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'house_scaler.pkl')
+house_model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'house_model.pkl')
 
-house_scaler = joblib.load(scaler_path)
-house_model = joblib.load(model_path)
+house_scaler = joblib.load(house_scaler_path)
+house_model = joblib.load(house_model_path)
 
-scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'scaler_bank.pkl')
-model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'log_model_bank.pkl')
+bank_scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'scaler_bank.pkl')
+bank_model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'log_model_bank.pkl')
 
-bank_scaler = joblib.load(scaler_path)
-bank_model = joblib.load(model_path)
+bank_scaler = joblib.load(bank_scaler_path)
+bank_model = joblib.load(bank_model_path)
 
-scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'diabetes_scaler.pkl')
-model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'diabetes_log_model.pkl')
+diabetes_scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'diabetes_scaler.pkl')
+diabetes_model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'diabetes_log_model.pkl')
 
-diabetes_scaler = joblib.load(scaler_path)
-diabetes_model = joblib.load(model_path)
+diabetes_scaler = joblib.load(diabetes_scaler_path)
+diabetes_model = joblib.load(diabetes_model_path)
 
-scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'scaler_avocado.pkl')
-model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'log_model_avocado.pkl')
+avocado_scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'scaler_avocado.pkl')
+avocado_model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'log_model_avocado.pkl')
 
-avocado_scaler = joblib.load(scaler_path)
-avocado_model = joblib.load(model_path)
+avocado_scaler = joblib.load(avocado_scaler_path)
+avocado_model = joblib.load(avocado_model_path)
 
-scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'mushroom_scaler.pkl')
-model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'mushroom_random_model.pkl')
+mushroom_scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'mushroom_scaler.pkl')
+mushroom_model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'mushroom_random_model.pkl')
 
-mushroom_scaler = joblib.load(scaler_path)
-mushroom_model = joblib.load(model_path)
+mushroom_scaler = joblib.load(mushroom_scaler_path)
+mushroom_model = joblib.load(mushroom_model_path)
 
-scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'logistic_scaler.pkl')
-model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'logistic_model.pkl')
+telecom_scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'logistic_scaler.pkl')
+telecom_model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'logistic_model.pkl')
 
-telecom_scaler = joblib.load(scaler_path)
-telecom_model = joblib.load(model_path)
+telecom_scaler = joblib.load(telecom_scaler_path)
+telecom_model = joblib.load(telecom_model_path)
+
+hre_scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'hre_scaler.pkl')
+hre_model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'hre_tree_model.pkl')
+
+hre_scaler = joblib.load(hre_scaler_path)
+hre_model = joblib.load(hre_model_path)
 
 gender = ['male']
 race_ethnicity = ['group B', 'group C', 'group D' , 'group E']
@@ -64,12 +70,10 @@ lunch = ['standard']
 test_preparation_course = ['none']
 Sex = ['female']
 Embarked = ['Q', 'S']
-Neighborhoods = [
-    'Blueste', 'BrDale', 'BrkSide', 'ClearCr', 'CollgCr', 'Crawfor', 'Edwards',
-    'Gilbert', 'IDOTRR', 'MeadowV', 'Mitchel', 'NAmes', 'NPkVill', 'NWAmes',
-    'NoRidge', 'NridgHt', 'OldTown', 'SWISU', 'Sawyer', 'SawyerW', 'Somerst',
-    'StoneBr', 'Timber', 'Veenker'
-]
+Neighborhoods = ['Blueste', 'BrDale', 'BrkSide', 'ClearCr', 'CollgCr', 'Crawfor', 'Edwards',
+                 'Gilbert', 'IDOTRR', 'MeadowV', 'Mitchel', 'NAmes', 'NPkVill', 'NWAmes',
+                 'NoRidge', 'NridgHt', 'OldTown', 'SWISU', 'Sawyer', 'SawyerW', 'Somerst',
+                 'StoneBr', 'Timber', 'Veenker']
 person_gender = ['male']
 person_education = ['Bachelor', 'Doctorate', 'High School', 'Master']
 person_home_ownership = ['OTHER', 'OWN', 'RENT']
@@ -107,6 +111,15 @@ StreamingMovies = ['No internet service', 'Yes']
 Contract = ['One year', 'Two year']
 PaperlessBilling = ['Yes']
 PaymentMethod = ['Credit card (automatic)', 'Electronic check', 'Mailed check']
+BusinessTravel = ['Travel_Frequently', 'Travel_Rarely']
+Department = ['Research & Development', 'Sales']
+EducationField = ['Life Sciences', 'Marketing', 'Medical', 'Other', 'Technical Degree']
+Gender = ['Male']
+JobRole = ['Human Resources', 'Laboratory Technician', 'Manager',
+           'Manufacturing Director', 'Research Director', 'Research Scientist',
+           'Sales Executive', 'Sales Representative']
+MaritalStatus = ['Married', 'Single']
+OverTime = ['Yes']
 
 class StudentPredict(views.APIView):
  def post(self, request):
@@ -398,4 +411,47 @@ class TelecomPredict(views.APIView):
             else:
                 telecom_label = 'No'
             return Response({'Churn': telecom_label, 'Probability': round(probability, 2)}, status.HTTP_200_OK)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+class HREmployeePredict(views.APIView):
+    def post(self, request):
+        serializer = HREmployeeSerializers(data=request.data)
+        if serializer.is_valid():
+            data = serializer.validated_data
+            new_business = data.get('BusinessTravel')
+            business1or_0 = [1 if new_business == i else 0 for i in BusinessTravel]
+
+            new_department = data.get('Department')
+            department1or_0 = [1 if new_department == i else 0 for i in Department]
+
+            new_education = data.get('EducationField')
+            education1or_0 = [1 if new_education == i else 0 for i in EducationField]
+
+            new_gender = data.get('Gender')
+            gender1or_0 = [1 if new_gender == i else 0 for i in Gender]
+
+            new_job = data.get('JobRole')
+            job1or_0 = [1 if new_job == i else 0 for i in JobRole]
+
+            new_marital = data.get('MaritalStatus')
+            marital1or_0 = [1 if new_marital == i else 0 for i in MaritalStatus]
+
+            new_over = data.get('OverTime')
+            over1or_0 = [1 if new_over == i else 0 for i in OverTime]
+
+            features = ([data['Age'], data['DailyRate'], data['DistanceFromHome'], data['Education'], data['EnvironmentSatisfaction'],
+                         data['HourlyRate'], data['JobInvolvement'], data['JobLevel'], data['JobSatisfaction'], data['MonthlyIncome'],
+                         data['MonthlyRate'], data['NumCompaniesWorked'], data['PercentSalaryHike'], data['PerformanceRating'],
+                         data['RelationshipSatisfaction'], data['StockOptionLevel'], data['TotalWorkingYears'], data['TrainingTimesLastYear'],
+                         data['WorkLifeBalance'], data['YearsAtCompany'], data['YearsInCurrentRole'], data['YearsSinceLastPromotion'],
+                         data['YearsWithCurrManager']] + business1or_0 + department1or_0 + education1or_0 + gender1or_0 + job1or_0 + marital1or_0
+                        + over1or_0)
+            scaled_data = hre_scaler.transform([features])
+            proba = hre_model.predict_proba(scaled_data)[0]
+            probability = float(proba[1])
+            if probability > 0.5:
+                hre_label = 'Yes'
+            else:
+                hre_label = 'No'
+            return Response({'Attrition': hre_label, 'Probability': round(probability, 2)}, status.HTTP_200_OK)
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
