@@ -139,3 +139,15 @@ class HREmployeeSerializers(serializers.Serializer):
     JobRole = serializers.CharField(max_length=32)
     MaritalStatus = serializers.CharField(max_length=32)
     OverTime = serializers.CharField(max_length=32)
+
+
+class MobilePriceSerializers(serializers.Serializer):
+    Rating = serializers.FloatField()
+    Num_Ratings = serializers.IntegerField()
+    RAM = serializers.IntegerField()
+    ROM = serializers.IntegerField()
+    Back_Cam = serializers.IntegerField()
+    Front_Cam = serializers.IntegerField()
+    Battery = serializers.IntegerField()
+    Processor = serializers.CharField(max_length=64)
+    Scrap_Date = serializers.CharField(max_length=64)
