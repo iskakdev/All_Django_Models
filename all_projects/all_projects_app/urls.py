@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (StudentPredict, TitanicPredict, HousePredict, BankPredict,
                     DiabetesPredict, AvocadoPredict, MushroomPredict, TelecomPredict,
-                    HREmployeePredict)
+                    HREmployeePredict, MobilePricePredict)
 
 urlpatterns = [
     path('student_predict/', StudentPredict.as_view(), name='student_predict'),
@@ -12,5 +12,6 @@ urlpatterns = [
     path('avocado_predict/', AvocadoPredict.as_view(), name='avocado_predict'),
     path('mushroom_predict/', MushroomPredict.as_view(), name='mushroom_predict'),
     path('telecom_predict/', TelecomPredict.as_view(), name='telecom_predict'),
-    path('hremployee_predict/', HREmployeePredict.as_view(), name='hremployee_predict')
+    path('hremployee_predict/', HREmployeePredict.as_view(), name='hremployee_predict'),
+    path('mobile_predict/', MobilePricePredict.as_view(), name='mobile_price')
 ]

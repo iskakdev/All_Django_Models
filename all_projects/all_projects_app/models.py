@@ -139,3 +139,14 @@ class HREmployee(models.Model):
     JobRole = models.CharField(max_length=32)
     MaritalStatus = models.CharField(max_length=32)
     OverTime = models.CharField(max_length=32)
+
+class MobilePrice(models.Model):
+    Rating = models.FloatField()
+    Num_Ratings = models.IntegerField()
+    RAM = models.IntegerField()
+    ROM = models.IntegerField()
+    Back_Cam = models.IntegerField()
+    Front_Cam = models.IntegerField()
+    Battery = models.IntegerField()
+    Processor = models.CharField(max_length=64)
+    Scrap_Date = models.CharField(max_length=64)

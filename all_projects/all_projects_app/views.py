@@ -3,7 +3,8 @@ from rest_framework import views, status
 from rest_framework.response import Response
 from .serializers import (StudentPerformanceSerializers, TitanicSerializers, HouseSerializers,
                           BankSerializers, DiabetesSerializers, AvocadoSerializers,
-                          MushroomSerializers, TelecomSerializers, HREmployeeSerializers)
+                          MushroomSerializers, TelecomSerializers, HREmployeeSerializers,
+                          MobilePriceSerializers)
 import joblib
 import os
 from django.conf import settings
@@ -62,6 +63,15 @@ hre_model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'hre_tree_model.pk
 
 hre_scaler = joblib.load(hre_scaler_path)
 hre_model = joblib.load(hre_model_path)
+
+mobile_scaler_path = os.path.join(settings.BASE_DIR, 'ml_models', 'mobile_scaler.pkl')
+mobile_model_path = os.path.join(settings.BASE_DIR, 'ml_models', 'mobile_price_model.pkl')
+mobile_processor_cols_path = os.path.join(settings.BASE_DIR, 'ml_models', 'processor_cols.pkl')
+
+mobile_scaler = joblib.load(mobile_scaler_path)
+mobile_model = joblib.load(mobile_model_path)
+mobile_processor_cols = joblib.load(mobile_processor_cols_path)
+mobile_processor_list = [col.replace('Processor_', '') for col in mobile_processor_cols]
 
 gender = ['male']
 race_ethnicity = ['group B', 'group C', 'group D' , 'group E']
@@ -454,4 +464,21 @@ class HREmployeePredict(views.APIView):
             else:
                 hre_label = 'No'
             return Response({'Attrition': hre_label, 'Probability': round(probability, 2)}, status.HTTP_200_OK)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+class MobilePricePredict(views.APIView):
+    def post(self, request):
+        serializer = MobilePriceSerializers(data=request.data)
+        if serializer.is_valid():
+            data = serializer.validated_data
+
+            new_processor = data.get('Processor')
+            new_scrap = data.get('Scrap_Date')
+            processor1or_0 = [1 if new_processor == i else 0 for i in mobile_processor_list]
+
+            features = ([data['Rating'], data['Num_Ratings'], data['RAM'], data['ROM'], data['Back_Cam'],
+                         data['Front_Cam'], data['Battery']] + processor1or_0)
+            scaled_data = mobile_scaler.transform([features])
+            pred = mobile_model.predict(scaled_data)[0]
+            return Response({'Predict Price': round(pred, 2)}, status.HTTP_200_OK)
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
